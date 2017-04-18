@@ -1,0 +1,31 @@
+
+# Create tables: mysql --host=127.0.0.1 --port=3306 --user=${MYSQL_USER} --password=${MYSQL_PASSWORD} ${DB_NAME} < schema-mysql.sql
+# Backup: docker run --rm --link ${container}:db mysql:5.6.31 mysqldump -u${username} -p${password} -hdb sonar >backup/$(date +%Y%m%d-%H%M)-sonar.sql
+
+version: '2.1'
+services:
+  mysql:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ${DOCKER_REGISTRY:-registry.docker.local}/mysql:5.6.31
+    command: [--character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci]
+    container_name: ${MYSQL_HOSTNAME:-local-mysql}
+    hostname: ${MYSQL_HOSTNAME:-local-mysql}
+    environment:
+    - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-root} # changeme
+    - MYSQL_USER=${MYSQL_USER:-user} # changeme
+    - MYSQL_PASSWORD=${MYSQL_PASSWORD:-user_pass} # changeme
+    - DB_NAME=${DB_NAME:-db}
+    ports:
+    - "3306:3306"
+    volumes:
+    - mysql-volume:/var/lib/mysql
+
+volumes:
+  mysql-volume: {}
+
+networks:
+  default:
+    external:
+      name: oss-network
