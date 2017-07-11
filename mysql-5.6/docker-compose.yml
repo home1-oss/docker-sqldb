@@ -8,10 +8,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: ${DOCKER_REGISTRY:-registry.docker.local}/mysql:5.6.31
+    image: ${DOCKER_REGISTRY:-home1oss}/mysql:5.6.31
     command: [--character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci]
-    container_name: ${MYSQL_HOSTNAME:-local-mysql}
-    hostname: ${MYSQL_HOSTNAME:-local-mysql}
+    container_name: ${MYSQL_HOSTNAME:-mysql.local}
+    hostname: ${MYSQL_HOSTNAME:-mysql.local}
     environment:
     - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-root} # changeme
     - MYSQL_USER=${MYSQL_USER:-user} # changeme
