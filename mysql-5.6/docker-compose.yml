@@ -1,7 +1,4 @@
 
-# Create tables: mysql --host=127.0.0.1 --port=3306 --user=${MYSQL_USER} --password=${MYSQL_PASSWORD} ${DB_NAME} < schema-mysql.sql
-# Backup: docker run --rm --link ${container}:db mysql:5.6.31 mysqldump -u${username} -p${password} -hdb sonar >backup/$(date +%Y%m%d-%H%M)-sonar.sql
-
 version: '2.1'
 services:
   mysql:
