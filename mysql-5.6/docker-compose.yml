@@ -1,7 +1,7 @@
 
 version: '2.1'
 services:
-  mysql:
+  mysql56:
     build:
       context: .
       dockerfile: Dockerfile
@@ -13,16 +13,16 @@ services:
     - MYSQL_PASSWORD=${MYSQL_PASSWORD:-user_pass} # changeme
     - MYSQL_DATABASE=${MYSQL_DATABASE:-db}
     hostname: ${MYSQL_DOMAIN:-mysql}.${INFRASTRUCTURE:-local}
-    image: ${DOCKER_REGISTRY:-home1oss}/mysql:5.6.31
+    image: ${DOCKER_REGISTRY:-home1oss}/mysql:5.6.40
     # --net=host in order to be able to connect from outside of docker
     #network_mode: host
     ports:
     - "3306:3306"
     volumes:
-    - volume-mysql:/var/lib/mysql
+    - volume-mysql56:/var/lib/mysql
 
 volumes:
-  volume-mysql: {}
+  volume-mysql56: {}
 
 #networks:
 #  default:

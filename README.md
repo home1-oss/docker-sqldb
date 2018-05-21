@@ -35,5 +35,5 @@ mysql --host=mysql.internal --port=3306 --user=user --password=user_pass db < sc
 
 ## Backup
 ```sh
-docker run --rm --link ${container}:db mysql:5.6.31 mysqldump -u${username} -p${password} -hdb ${dbname} >backup/$(date +%Y%m%d-%H%M)-${dbname}.sql
+docker run --rm --link ${container}:db mysql:5.6.40 mysqldump -u${username} -p${password} -hdb ${dbname} >backup/$(date +%Y%m%d-%H%M)-${dbname}.sql
 ```
