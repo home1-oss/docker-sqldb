@@ -1,7 +1,7 @@
 
 version: '2.1'
 services:
-  mariadb10:
+  mariadb102:
     build:
       context: .
       dockerfile: Dockerfile
@@ -17,7 +17,7 @@ services:
     - "5567:5567"
     - "5568:5568"
     volumes:
-    - volume-mariadb10:/var/lib/mysql
+    - volume-mariadb102:/var/lib/mysql
 
 networks:
   default:
@@ -25,4 +25,4 @@ networks:
       name: oss-network
 
 volumes:
-  volume-mariadb10: {}
+  volume-mariadb102: {}
