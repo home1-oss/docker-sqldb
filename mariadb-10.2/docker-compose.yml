@@ -1,0 +1,28 @@
+
+version: '2.1'
+services:
+  mariadb10:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ${DOCKER_REGISTRY:-home1oss}/mariadb:10.2.14
+    restart: always
+    container_name: ${MYSQL_DOMAIN:-mariadb}.${INFRASTRUCTURE:-local}
+    environment:
+    - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-root_pass} # changeme
+    hostname: ${MYSQL_DOMAIN:-mariadb}.${INFRASTRUCTURE:-local}
+    ports:
+    - "3306:3306"
+    - "5444:5444"
+    - "5567:5567"
+    - "5568:5568"
+    volumes:
+    - volume-mariadb10:/var/lib/mysql
+
+networks:
+  default:
+    external:
+      name: oss-network
+
+volumes:
+  volume-mariadb10: {}

@@ -1,0 +1,33 @@
+
+version: '2.1'
+services:
+  postgresql:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: home1oss/postgresql:9.6.1-alpine
+    restart: always
+    container_name: ${POSTGRESQL_DOMAIN:-postgresql}.${INFRASTRUCTURE:-local}
+    hostname: ${POSTGRESQL_DOMAIN:-postgresql}.${INFRASTRUCTURE:-local}
+    environment:
+    - POSTGRES_USER=${POSTGRES_USER:-user}
+    - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-user_pass}
+    - SONARQUBE_JDBC_USERNAME=${SONARQUBE_JDBC_USERNAME:-sonar}
+    - SONARQUBE_JDBC_PASSWORD=${SONARQUBE_JDBC_PASSWORD:-sonar}
+    ports:
+    - "${POSTGRESQL_EXTERNAL_PORT:-5432}:${POSTGRESQL_PORT:-5432}"
+
+    volumes:
+    - postgresql:/var/lib/postgresql
+    # This needs explicit mapping due to https://github.com/docker-library/postgres/blob/4e48e3228a30763913ece952c611e5e9b95c8759/Dockerfile.template#L52
+    - postgresql_data:/var/lib/postgresql/data
+    #- ./init_database_for_sonarqube.sh:/docker-entrypoint-initdb.d/init_database_for_sonarqube.sh
+
+volumes:
+  postgresql:
+  postgresql_data:
+
+networks:
+  default:
+    external:
+      name: oss-network
