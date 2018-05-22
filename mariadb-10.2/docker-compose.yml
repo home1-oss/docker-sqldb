@@ -1,5 +1,5 @@
 
-version: '2.1'
+version: '3.6'
 services:
   mariadb102:
     build:
@@ -21,8 +21,8 @@ services:
 
 networks:
   default:
-    external:
-      name: oss-network
+    external: true
+    name: oss-network
 
 volumes:
   volume-mariadb102: {}
