@@ -1,5 +1,5 @@
 
-version: '3.6'
+version: '2.1'
 services:
   mariadb102:
     build:
@@ -12,10 +12,10 @@ services:
     - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-root_pass} # changeme
     hostname: ${MYSQL_DOMAIN:-mariadb}.${INFRASTRUCTURE:-local}
     ports:
-    - "3306:3306"
-    - "5444:5444"
-    - "5567:5567"
-    - "5568:5568"
+    - "${MARIADB_3306_PORT:-3306}:3306"
+    - "${MARIADB_5444_PORT:-5444}:5444"
+    - "${MARIADB_5567_PORT:-5567}:5567"
+    - "${MARIADB_5568_PORT:-5568}:5568"
     volumes:
     - volume-mariadb102:/var/lib/mysql
 

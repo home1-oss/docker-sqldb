@@ -1,5 +1,5 @@
 
-version: '3.6'
+version: '2.1'
 services:
   mysql56:
     build:
@@ -18,7 +18,7 @@ services:
     # --net=host in order to be able to connect from outside of docker
     #network_mode: host
     ports:
-    - "3306:3306"
+    - "${MYSQL_EXTERNAL_PORT:-3306}:${MYSQL_PORT:-3306}"
     volumes:
     - volume-mysql56:/var/lib/mysql
 
