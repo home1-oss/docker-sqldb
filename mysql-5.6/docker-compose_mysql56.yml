@@ -1,31 +1,17 @@
 
 version: '2.1'
 services:
-  mysql56-develop:
+  mysql56:
     extends:
       file: docker-compose-base.yml
       service: base-mysql56
     container_name: ${INSTANCE_NAME:-mysql56}.${INSTANCE_DOMAIN:-local}
     hostname: ${INSTANCE_NAME:-mysql56}.${INSTANCE_DOMAIN:-local}
-    networks:
-      local-network:
-        ipv4_address: 172.16.238.56
-        ipv6_address: 2001:3984:3989::56
+    network_mode: bridge
     ports:
     - "${SERVER_PORT:-3306}:3306"
     volumes:
     - data:/var/lib/mysql
-
-networks:
-  local-network:
-    external: true
-    driver: bridge
-    enable_ipv6: true
-    ipam:
-      driver: default
-      config:
-      - subnet: 172.16.238.0/24
-      - subnet: 2001:3984:3989::/64
 
 volumes:
   data:

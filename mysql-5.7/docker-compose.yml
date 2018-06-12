@@ -1,21 +1,18 @@
 
 version: '2.1'
 services:
-  mariadb101-develop:
+  mysql57-develop:
     extends:
       file: docker-compose-base.yml
-      service: base-mariadb101
-    container_name: ${INSTANCE_NAME:-mariadb101}.${INSTANCE_DOMAIN:-local}
-    hostname: ${INSTANCE_NAME:-mariadb101}.${INSTANCE_DOMAIN:-local}
+      service: base-mysql57
+    container_name: ${INSTANCE_NAME:-mysql57}.${INSTANCE_DOMAIN:-local}
+    hostname: ${INSTANCE_NAME:-mysql57}.${INSTANCE_DOMAIN:-local}
     networks:
       local-network:
-        ipv4_address: 172.16.238.101
-        ipv6_address: 2001:3984:3989::101
+        ipv4_address: 172.16.238.57
+        ipv6_address: 2001:3984:3989::57
     ports:
-    - "${MARIADB_3306_PORT:-3306}:3306"
-    - "${MARIADB_5444_PORT:-5444}:5444"
-    - "${MARIADB_5567_PORT:-5567}:5567"
-    - "${MARIADB_5568_PORT:-5568}:5568"
+    - "${SERVER_PORT:-3306}:3306"
     volumes:
     - data:/var/lib/mysql
 
