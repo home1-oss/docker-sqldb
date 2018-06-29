@@ -7,5 +7,5 @@ services:
       dockerfile: Dockerfile
     environment:
     - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-root_pass} # changeme
-    image: ${IMAGE_PREFIX:-home1oss}/mariadb:${IMAGE_VERSION:-10.1.22}
+    image: ${IMAGE_PREFIX:-home1oss}/mariadb:${IMAGE_TAG:-10.1.22}
     restart: always
