@@ -1,5 +1,6 @@
-FROM scratch
+# see https://github.com/mysql/mysql-docker/blob/mysql-server/5.6/Dockerfile
 
+FROM scratch
 COPY --from=mysql:5.6.40 / /
 
 RUN set -ex \
