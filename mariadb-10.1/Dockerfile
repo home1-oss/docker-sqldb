@@ -1,3 +1,5 @@
+# see https://github.com/docker-library/mariadb/blob/master/10.1/Dockerfile
+
 FROM debian:jessie
 
 COPY --from=mariadb:10.1.34 / /
