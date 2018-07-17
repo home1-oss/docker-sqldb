@@ -1,5 +1,13 @@
 
-FROM mysql:5.7.22
+FROM scratch
+
+COPY --from=mysql:5.7.22 / /
+
+RUN set -ex \
+  && usermod -u 1000  mysql \
+  && groupmod -g 1000 mysql \
+  && find -user 999 -path "/proc" -prune -exec chown mysql:mysql {} ";" \
+  && chown -hR mysql:mysql /var/log/mysql /etc/mysql
 
 # -------------------- Locale --------------------
 
@@ -23,3 +31,10 @@ ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
 # -------------------- Locale --------------------
+
+VOLUME /var/lib/mysql
+
+ENTRYPOINT ["/entrypoint.sh"]
+HEALTHCHECK CMD /healthcheck.sh
+EXPOSE 3306 33060
+CMD ["mysqld"]
